@@ -3,207 +3,282 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alvida 2026</title>
-    <!-- Bootstrap CSS for responsiveness -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
-    <!-- html2canvas for image download -->
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <title>RAABTA | Farewell 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Inknut+Antiqua:wght@300;500&family=Tenor+Sans&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --marigold: #FF9933;
+            --deep-saffron: #FF4500;
+            --vintage-paper: #f4ece1;
+            --henna-brown: #3d0c02;
+            --gold-leaf: #D4AF37;
+        }
+
         body {
-            background: linear-gradient(135deg, #ffe7e0, #b8e6d9);
-            font-family: 'Roboto', sans-serif;
-            color: #333;
-            padding: 50px 20px;
-            text-align: center;
-            animation: fadeIn 1.5s ease-in-out;
+            margin: 0;
+            background-color: var(--vintage-paper);
+            color: var(--henna-brown);
+            font-family: 'Tenor Sans', sans-serif;
+            overflow-x: hidden;
+            background-image: url('https://www.transparenttextures.com/patterns/handmade-paper.png');
         }
-        h1, h2 {
-            font-family: 'Playfair Display', serif;
-            color: #4a2c0b;
+
+        /* Desi Border Decorations */
+        .mandala-corner {
+            position: fixed;
+            width: 150px;
+            height: 150px;
+            opacity: 0.15;
+            z-index: 10;
+            pointer-events: none;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/1043/1043444.png'); /* Mandala Icon */
+            background-size: contain;
         }
-        h1 {
+        .top-left { top: -20px; left: -20px; }
+        .top-right { top: -20px; right: -20px; transform: rotate(90deg); }
+
+        /* Falling Marigolds */
+        .genda-phool {
+            position: fixed;
+            top: -50px;
+            font-size: 25px;
+            z-index: 99;
+            user-select: none;
+            cursor: default;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* Hero Section */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-bottom: 4px double var(--marigold);
+        }
+
+        .title-container {
+            position: relative;
+            padding: 40px;
+            border: 1px solid rgba(61, 12, 2, 0.2);
+        }
+
+        .main-title {
+            font-family: 'Pinyon Script', cursive;
+            font-size: clamp(5rem, 15vw, 9rem);
+            margin: 0;
+            color: var(--henna-brown);
+            line-height: 1;
+        }
+
+        .batch-tag {
+            font-family: 'Inknut Antiqua', serif;
+            letter-spacing: 5px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Desi Countdown */
+        .timer-box {
+            background: rgba(255, 153, 51, 0.1);
+            padding: 20px 40px;
+            border-radius: 50px;
+            border: 1px dashed var(--marigold);
+            margin: 30px 0;
+            display: flex;
+            gap: 15px;
+            font-family: 'Inknut Antiqua', serif;
+        }
+
+        /* Buttons */
+        .btn-desi {
+            background: var(--henna-brown);
+            color: var(--vintage-paper);
+            padding: 15px 35px;
+            text-decoration: none;
+            border: 2px solid var(--gold-leaf);
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: 0.3s;
+            box-shadow: 5px 5px 0px var(--marigold);
+        }
+        .btn-desi:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 8px 8px 0px var(--marigold);
+        }
+
+        /* Memory Roll - The Filmstrip */
+        .memory-section {
+            padding: 80px 0;
+            background: #3d0c02; /* Henna/Dark wood background */
+            color: var(--vintage-paper);
+        }
+
+        .memory-title {
+            font-family: 'Pinyon Script', cursive;
             font-size: 4rem;
-            margin-bottom: 20px;
+            color: var(--marigold);
         }
-        .hero {
-            margin-bottom: 50px;
+
+        .film-strip {
+            display: flex;
+            overflow-x: auto;
+            gap: 30px;
+            padding: 40px;
+            scrollbar-width: none;
         }
-        .btn-primary {
-            background-color: #4a2c0b;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+
+        .polaroid {
+            min-width: 260px;
+            background: white;
+            padding: 15px 15px 50px 15px;
+            transform: rotate(-2deg);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .btn-primary:hover {
-            background-color: #6b4515;
+        .polaroid img { width: 100%; height: 250px; object-fit: cover; filter: sepia(0.2); }
+        .polaroid p { color: #333; font-family: 'Pinyon Script', cursive; font-size: 1.8rem; margin: 10px 0 0 0; }
+
+        /* The Quote */
+        .desi-quote {
+            padding: 100px 20px;
+            font-style: italic;
+            background-image: radial-gradient(circle, rgba(255,153,51,0.1) 0%, transparent 70%);
         }
-        #countdown {
+
+        .desi-quote h2 {
+            font-family: 'Inknut Antiqua', serif;
             font-size: 2rem;
-            margin: 20px 0;
-            color: #4a2c0b;
-        }
-        .souvenirs {
             max-width: 800px;
-            margin: 50px auto;
+            margin: 0 auto;
             line-height: 1.8;
         }
-        .invite-preview {
-            max-width: 500px;
-            margin: 30px auto;
-            padding: 20px;
-            background: linear-gradient(135deg, #ffe7e0, #b8e6d9);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+        /* Map & Playlist Grid */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .desi-card {
+            background: white;
+            padding: 30px;
+            border: 1px solid var(--marigold);
+            border-radius: 2px;
             position: relative;
-            overflow: hidden;
         }
-        .invite-preview::before, .invite-preview::after {
-            content: '';
+        .desi-card::before {
+            content: "✿";
+            color: var(--marigold);
             position: absolute;
-            background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSIyMDBweCIgaGVpZ2h0PSIyMDBweCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+ICAgIDx0aXRsZT5MZWF2ZXM8L3RpdGxlPiAgICA8ZyBpZD0iUGFnZS0xIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTQwLCAtNDApIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPiAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDAsIDQwKSI+ICAgICAgICAgICAgPHBhdGggZD0iTTEwMCwxMDBjLTEwLDIwLTIwLDMwLTQwLDMwQzQwLDE0MCwyMCwxMzAsMCwxMDBjMC0zMCwyMC02MCw0MC02MEM4MCw0MCw5MCwyMCwxMDAsMEwxMDAsMTAwWiIgc3Ryb2tlPSIjQjVBMjgyIiBzdHJva2Utd2lkdGg9IjIiLz4gICAgICAgIDwvZz4gICAgPC9nPjwvc3ZnPg==') no-repeat; /* Simple leaf SVG as base64 */
-            opacity: 0.3;
-            width: 100px;
-            height: 100px;
+            top: 10px; left: 10px;
         }
-        .invite-preview::before {
-            top: 10px;
-            left: 10px;
-            transform: rotate(-30deg);
+
+        /* Music Toggle */
+        #music-control {
+            position: fixed;
+            bottom: 30px; right: 30px;
+            background: var(--marigold);
+            width: 60px; height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center; justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            font-size: 24px;
         }
-        .invite-preview::after {
-            bottom: 10px;
-            right: 10px;
-            transform: rotate(30deg);
-        }
-        .invite-text {
-            font-size: 1.1rem;
-            line-height: 1.5;
-        }
-        .invite-date {
-            display: inline-block;
-            border: 2px solid #4a2c0b;
-            padding: 10px;
-            margin: 10px;
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        #map {
-            height: 300px;
-            margin: 50px auto;
-            max-width: 800px;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        .section {
-            animation: fadeIn 2s ease-in-out;
-        }
+
     </style>
 </head>
-<body onload="startCountdown()">
-    <div class="container hero section">
-        <h1>Alvida 2026</h1>
-        <p class="lead">When? February 9th, 2026 at 11 AM.</p>
-        <p class="lead">Venue: Providence Junior School Auditorium, Vellayil, Kozhikode, Kerala, India.</p>
-        <div id="countdown"></div>
-    </div>
+<body>
 
-    <!-- Personalized Invite Section -->
-    <div class="container section">
-        <h2>Grab Your Personalized Invite 📩</h2>
-        <p>Enter your name below to generate a custom invite.</p>
-        <input type="text" id="userName" class="form-control w-50 mx-auto mb-3" placeholder="Your Name">
-        <button onclick="generateInvite()" class="btn btn-primary">Generate Invite</button>
-        <div id="invitePreview" class="invite-preview" style="display: none;">
-            <h3 id="dearName">Dear Seniors,</h3>
-            <p>We cordially invite you all to:</p>
-            <h1 style="font-size: 3rem; color: #4a2c0b;">“Alvida” 2026</h1>
-            <p class="invite-text">"As you step into a new chapter, carry with you the wisdom gained and the friendships cherished."</p>
-            <p class="invite-text">Farewell seniors, you will be missed.</p>
-            <p class="invite-text">VENUE: Providence Junior School Auditorium.</p>
-            <div>
-                <span class="invite-date">FEB 09th</span>
-                <span class="invite-date">FRIDAY 11:00 AM</span>
-            </div>
-            <p class="invite-text">कभी अलविदा ना कहना...</p>
-            <p class="invite-text">- with love, your juniors.</p>
+    <div class="mandala-corner top-left"></div>
+    <div class="mandala-corner top-right"></div>
+
+    <div id="music-control" onclick="toggleMusic()">🎵</div>
+    <audio id="raabtaAudio" loop>
+        <source src="your-raabta-audio-link.mp3" type="audio/mpeg">
+    </audio>
+
+    <header>
+        <div class="title-container">
+            <h1 class="main-title">Raabta</h1>
+            <div class="batch-tag">BATCH OF 2024 — 2026</div>
         </div>
-        <button id="downloadBtn" onclick="downloadInvite()" class="btn btn-primary mt-3" style="display: none;">Download Invite</button>
-    </div>
+        
+        <p>12th January 2026 • 8:40 AM</p>
 
-    <!-- Souvenirs Section -->
-    <div class="container souvenirs section">
-        <h2>Souvenirs</h2>
-        <p>The place of residence that for the previous years served as your second home.</p>
-        <p>The stairs that you ascended each day.</p>
-        <p>The lawn where you shared the epiphany.</p>
-        <p>The marks you left behind on the hallways.</p>
-        <p>कभी अलविदा ना कहना</p>
-    </div>
+        <div class="timer-box" id="timer">
+            </div>
 
-    <!-- Map Section -->
-    <div class="container section">
-        <h2>Find the Venue</h2>
-        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3913.061912515617!2d75.769!3d11.258!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba6593a00000001%3A0x1f!5e0!3m2!1sen!2sin!4v1700000000000&z=15" frameborder="0" allowfullscreen="" loading="lazy"></iframe>
-    </div>
+        <a href="#" class="btn-desi">GRAB INVITATION CARD ↓</a>
+    </header>
 
-    <!-- RSVP Section -->
-    <div class="container section">
-        <h2>RSVP</h2>
-        <p>Let us know if you're coming!</p>
-        <form action="https://formspree.io/f/your-formspree-id" method="POST" class="w-50 mx-auto">
-            <input type="text" name="name" class="form-control mb-3" placeholder="Your Name" required>
-            <input type="email" name="email" class="form-control mb-3" placeholder="Your Email" required>
-            <select name="attending" class="form-select mb-3">
-                <option>Yes, I'll be there!</option>
-                <option>No, can't make it.</option>
-            </select>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-        <p class="mt-3 small">Replace the form action with your Formspree endpoint (free signup at formspree.io).</p>
+    <section class="desi-quote">
+        <h2>"Kuch raaste khatam ho jaate hain,<br>par raabte hamesha rehte hain."</h2>
+        <p style="margin-top: 20px; opacity: 0.7;">— Dedicated to the memories we made in these corridors.</p>
+    </section>
+     <section class="memory-section">
+        <h2 class="memory-title">Memory Roll</h2>
+        <div class="film-strip">
+            <div class="polaroid"><img src="https://images.unsplash.com/photo-1528154291023-a6525fabe5b4?q=80" alt=""><p>Last Lunch</p></div>
+            <div class="polaroid" style="transform: rotate(3deg);"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80" alt=""><p>Exam Cries</p></div>
+            <div class="polaroid" style="transform: rotate(-1deg);"><img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80" alt=""><p>Squad Goals</p></div>
+            <div class="polaroid" style="transform: rotate(2deg);"><img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80" alt=""><p>Farewell Vibe</p></div>
+        </div>
+    </section>
+
+    <div class="grid-container">
+        <div class="desi-card">
+            <h3 style="font-family: 'Pinyon Script'; font-size: 2.5rem;">Venue Map</h3>
+            <div style="width: 100%; height: 200px; background: #eee; border: 1px solid #ddd;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093643!2d144.9537353153166!3d-37.81732767975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sSchool!5e0!3m2!1sen!2sin!4v1610000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="desi-card">
+            <h3 style="font-family: 'Pinyon Script'; font-size: 2.5rem;">Our Playlist</h3>
+            <iframe style="border-radius:0px" src="https://open.spotify.com/embed/track/2SST9p869vMOfN4F9Kpx7l?utm_source=generator" width="100%" height="200" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
     </div>
 
     <script>
-        function startCountdown() {
-            const countDownDate = new Date("February 9, 2026 11:00:00").getTime();
-            const x = setInterval(() => {
-                const now = new Date().getTime();
-                const distance = countDownDate - now;
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-                if (distance < 0) {
-                    clearInterval(x);
-                    document.getElementById("countdown").innerHTML = "The event has started!";
-                }
-            }, 1000);
+        // Falling Marigolds
+        function createFlower() {
+            const flower = document.createElement('div');
+            flower.className = 'genda-phool';
+            flower.innerHTML = '✿'; 
+            flower.style.left = Math.random() * 100 + 'vw';
+            flower.style.animationDuration = Math.random() * 3 + 4 + 's';
+            flower.style.color = Math.random() > 0.5 ? '#FF9933' : '#FFD700';
+            document.body.appendChild(flower);
+            setTimeout(() => flower.remove(), 6000);
         }
+        setInterval(createFlower, 400);
 
-        function generateInvite() {
-            const name = document.getElementById("userName").value.trim();
-            if (name) {
-                document.getElementById("dearName").innerText = `Dear ${name},`;
-                document.getElementById("invitePreview").style.display = "block";
-                document.getElementById("downloadBtn").style.display = "block";
-            } else {
-                alert("Please enter your name.");
-            }
-        }
-
-        function downloadInvite() {
-            html2canvas(document.getElementById("invitePreview")).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'alvida-invite.png';
-                link.href = canvas.toDataURL();
-                link.click();
-            });
+        // Countdown Logic
+        const farewellDate = new Date("January 12, 2026 11:30:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = farewellDate - now;
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById("timer").innerHTML = <span>${h}h</span> : <span>${m}m</span> : <span>${s}s</span>;
+        }, 1000);
+        // Music Toggle
+        let playing = false;
+        const audio = document.getElementById("raabtaAudio");
+        function toggleMusic() {
+            if(!playing) { audio.play(); document.getElementById("music-control").innerHTML = "⏸"; }
+            else { audio.pause(); document.getElementById("music-control").innerHTML = "🎵"; }
+            playing = !playing;
         }
     </script>
 </body>
